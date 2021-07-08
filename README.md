@@ -53,7 +53,7 @@ StockSentiment(String tickers)
 SentimentResult(double average, int positive,int negative,int neutral)
 //Headline date, text, and link
 Headline(DateTime date, String text, String link)
-
+```
 
 
 ## uses and licenses
