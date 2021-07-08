@@ -1,4 +1,8 @@
-# release 0.0.3
+# release 0.0.4
+
+* updated readme
+
+## release 0.0.3
 
 * removed print statements so logs arent blasted.  instead of returning null from getheadlines just put null for the unrecognized ticker.
 

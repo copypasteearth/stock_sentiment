@@ -6,7 +6,7 @@ A package to get stock sentiment from headlines.
 
 ```groovy
 dependencies:
-  stock_sentiment: ^0.0.2
+  stock_sentiment: ^0.0.4
 
 ```
 

@@ -1,6 +1,6 @@
 name: stock_sentiment
 description: A package to get stock sentiment from headlines. Given a String of tickers seperated by space, it will give you all the sentiment.
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/copypasteearth/stock_sentiment
 
 environment:
