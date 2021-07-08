@@ -18,21 +18,28 @@ import 'package:stock_sentiment/stock_sentiment.dart';
 
 /// main() example
 void main() {
-  var sentiment = StockSentiment("GOOG");
+  var sentiment = StockSentiment("GOOG ?jO+");
   /// get headlines for 8 days
-  sentiment.getHeadlines(8).then((value) {
-    if (value != null) {
+  try{
+    sentiment.getHeadlines(8).then((value) {
+
       print(value);
       /// get the sentiment for each day
       var stuff = sentiment.getDailySentiment(value);
       print(stuff);
       /// get a single headline sentiment
       var single = sentiment.getSingleSentiment(value["GOOG"][0].text);
+
       print(single);
-    } else {
-      print("null ticker search or invalid ticker");
-    }
-  });
+      /// this will be null
+      print(value["?jO+"]);
+
+    });
+  }catch(e){
+    print(e);
+  }
+
+
 }
 ```
 

@@ -61,23 +61,23 @@ class StockSentiment {
   /// getHeadlines method
   /// gets all of the headlines for the given tickers
   /// returns null if any of the tickers are invalid
-  Future<Map<String, List<Headline>>?> getHeadlines(int days) async {
+  Future<Map<String, List<Headline>>?> getHeadlines(int days) async{
     var now = DateTime.now();
     var earliest = now.subtract(new Duration(days: days));
 
     var ticks = tickers.split(" ");
     Map<String, List<Headline>> map = new Map();
     for (String tick in ticks) {
-      print(tick);
+      //print(tick);
       List<Headline> list = [];
       var url = Uri.parse('https://finviz.com/quote.ashx?t=' + tick);
       var response = await http.get(url);
       //print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      //print('Response body: ${response.body}');
       var doc = parse(response.body);
       var element = doc.getElementById("news-table");
       if (element == null) {
-        return null;
+        continue;
       }
       //print(element!.outerHtml);
       var trs = element.getElementsByTagName("tr");
@@ -88,10 +88,10 @@ class StockSentiment {
         String headline = "";
         String link = "";
         for (Element td in ele.getElementsByTagName("td")) {
-          print(td.text);
+          //print(td.text);
           var tex = td.text;
           var sp = tex.split(' ');
-          print(sp.length);
+          //print(sp.length);
           if (sp.length == 1) {
             date =
                 DateFormat('MMM-dd-yy hh:mma').parse(dateprefix + " " + sp[0]);
@@ -111,7 +111,7 @@ class StockSentiment {
           break;
         }
         for (Element a in ele.getElementsByTagName("a")) {
-          print("a : " + a.text);
+          //print("a : " + a.text);
           link = a.attributes['href'] as String;
           headline += a.text;
         }
@@ -159,7 +159,7 @@ class StockSentiment {
         } else {
           negative++;
         }
-        print(sent);
+        //print(sent);
         result += score;
         average++;
       }
