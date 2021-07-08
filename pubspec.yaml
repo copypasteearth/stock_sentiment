@@ -1,7 +1,7 @@
 name: stock_sentiment
 description: A package to get stock sentiment from headlines.
 version: 0.0.1
-homepage:
+homepage: https://github.com/copypasteearth/stock_sentiment
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
