@@ -6,28 +6,33 @@ A package to get stock sentiment from headlines.
 
 ```groovy
 dependencies:
-  stock_sentiment: ^0.0.1
+  stock_sentiment: ^0.0.2
 
 ```
 
 ## code quick example
 ```dart
+// @dart=2.9
+/// import the stock sentiment package
 import 'package:stock_sentiment/stock_sentiment.dart';
 
-void main(){
-//tickers have to be seperated by space
+/// main() example
+void main() {
   var sentiment = StockSentiment("GOOG");
-    sentiment.getHeadlines(8).then((value){
-      if(value != null){
-        print(value);
-        var stuff = sentiment.getDailySentiment(value);
-        print(stuff);
-        var single = sentiment.getSingleSentiment(value["GOOG"][0].text);
-        print(single);
-      }else{
-        print("null ticker search or invalid ticker");
-      }
-
+  /// get headlines for 8 days
+  sentiment.getHeadlines(8).then((value) {
+    if (value != null) {
+      print(value);
+      /// get the sentiment for each day
+      var stuff = sentiment.getDailySentiment(value);
+      print(stuff);
+      /// get a single headline sentiment
+      var single = sentiment.getSingleSentiment(value["GOOG"][0].text);
+      print(single);
+    } else {
+      print("null ticker search or invalid ticker");
+    }
+  });
 }
 ```
 

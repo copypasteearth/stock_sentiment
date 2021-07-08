@@ -1,6 +1,6 @@
 name: stock_sentiment
-description: A package to get stock sentiment from headlines.
-version: 0.0.1
+description: A package to get stock sentiment from headlines. Given a String of tickers seperated by space, it will give you all the headlines with links from finviz and then you can get sentiment of each day or each headline.
+version: 0.0.2
 homepage: https://github.com/copypasteearth/stock_sentiment
 
 environment:
