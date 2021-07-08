@@ -4,6 +4,12 @@ A package to get stock sentiment from headlines.
 
 ## Getting Started
 
+```groovy
+dependencies:
+  stock_sentiment: ^0.0.1
+
+```
+
 ## code quick example
 ```dart
 import 'package:stock_sentiment/stock_sentiment.dart';
