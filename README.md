@@ -6,7 +6,7 @@ A package to get stock sentiment from headlines.
 
 ```groovy
 dependencies:
-  stock_sentiment: ^0.0.4
+  stock_sentiment: ^0.0.5
 
 ```
 
@@ -58,8 +58,8 @@ Map<String,dynamic> getSingleSentiment(String text)
 StockSentiment(String tickers)
 //average sentiment, number of positive, negative, and neutral headlines
 SentimentResult(double average, int positive,int negative,int neutral)
-//Headline date, text, and link
-Headline(DateTime date, String text, String link)
+//Headline date, text, link, and extract
+Headline(DateTime date, String text, String link, String extract)
 ```
 
 

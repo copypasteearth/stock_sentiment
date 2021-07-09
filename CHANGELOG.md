@@ -1,4 +1,8 @@
-# release 0.0.4
+# release 0.0.5
+
+* got the actual articles content, headline was just not good enough
+
+## release 0.0.4
 
 * updated readme
 

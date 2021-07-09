@@ -13,11 +13,13 @@ import 'package:html/parser.dart';
 class Headline {
   late DateTime date;
   late String text;
+  late String extract;
   late String link;
-  Headline(DateTime date, String text, String link) {
+  Headline(DateTime date, String text, String link, String extract) {
     this.date = date;
     this.text = text;
     this.link = link;
+    this.extract = extract;
   }
 
   @override
@@ -61,7 +63,7 @@ class StockSentiment {
   /// getHeadlines method
   /// gets all of the headlines for the given tickers
   /// returns null if any of the tickers are invalid
-  Future<Map<String, List<Headline>>?> getHeadlines(int days) async{
+  Future<Map<String, List<Headline>>?> getHeadlines(int days) async {
     var now = DateTime.now();
     var earliest = now.subtract(new Duration(days: days));
 
@@ -87,6 +89,7 @@ class StockSentiment {
       for (Element ele in trs) {
         String headline = "";
         String link = "";
+        String extract = "";
         for (Element td in ele.getElementsByTagName("td")) {
           //print(td.text);
           var tex = td.text;
@@ -113,14 +116,40 @@ class StockSentiment {
         for (Element a in ele.getElementsByTagName("a")) {
           //print("a : " + a.text);
           link = a.attributes['href'] as String;
+          print("actual headline: " + a.text);
+          var content = await getArticleContent(link);
+          if (content.isNotEmpty) {
+            extract = content;
+          } else {
+            extract = a.text;
+          }
+
           headline += a.text;
         }
-        list.add(new Headline(date, headline, link));
+        list.add(new Headline(date, headline, link, extract));
       }
       map[tick] = list;
     }
 
     return map;
+  }
+
+  /// getArticleContent
+  /// gets the actual articles content unless status code is not 200
+  Future<String> getArticleContent(String url) async {
+    var response = await http.get(Uri.parse(url));
+    var code = response.statusCode;
+    if (code != 200) {
+      return "";
+    }
+    var doc = parse(response.body);
+    var p = doc.getElementsByTagName("p");
+    var description = "";
+    for (var para in p) {
+      description += para.text;
+    }
+
+    return description;
   }
 
   /// getDailySentiment method
@@ -150,7 +179,7 @@ class StockSentiment {
           average = 0;
           currentDate = now;
         }
-        var sent = sentiment.analysis(headline.text);
+        var sent = sentiment.analysis(headline.extract);
         var score = sent["score"] as int;
         if (score == 0) {
           neutral++;
